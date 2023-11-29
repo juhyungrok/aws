@@ -1,34 +1,44 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '2.6.5'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+buildscript {
+	ext {
+		springBootVersion = '2.1.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		jcenter() }
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
 
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'eclipse'
+}
 group = 'com.springboot'
-version = '0.0.1-SNAPSHOT'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
-// for Junit 5
-test { // (2)
-	useJUnitPlatform()
-}
+
+
 
 dependencies {
 	//(3)
 	implementation('org.springframework.boot:spring-boot-starter-web')
-	implementation('org.springframework.boot:spring-boot-starter-mustache')
 
 	// lombok
 	implementation('org.projectlombok:lombok')
-	implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-	implementation 'org.springframework.boot:spring-boot-starter-test'
 	annotationProcessor('org.projectlombok:lombok')
-	testImplementation('org.projectlombok:lombok')
-	testAnnotationProcessor('org.projectlombok:lombok')
 
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-	implementation("org.mariadb.jdbc:mariadb-java-client")
-	implementation('com.h2database:h2')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation 'junit:junit:4.13.1'
+
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
 }
